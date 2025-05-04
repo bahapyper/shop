@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Baha Store - Интернет-магазин одежды</title>
+    <meta name="description" content="Интернет-магазин модной одежды, обуви и аксессуаров">
+    <link rel="stylesheet" href="routing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<style>
+:root {
+  --primary-color: #333;
+  --secondary-color: #555;
+  --accent-color: #ff6b6b;
+  --light-color: #f8f9fa;
+  --dark-color: #212529;
+  --border-radius: 4px;
+  --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+  color: var(--primary-color);
+  background-color: var(--light-color);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Шапка и навигация */
+header {
+  background-color: white;
+  box-shadow: var(--box-shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--accent-color);
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+}
+
+.nav-links li {
+  margin-left: 2rem;
+}
+
+.nav-links a {
+  padding: 0.5rem;
+  transition: var(--transition);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--accent-color);
+}
+
+.cart-icon {
+  position: relative;
+}
+
+.cart-count {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: var(--accent-color);
+  color: white;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.7rem;
+}
+
+.burger {
+  display: none;
+  cursor: pointer;
+}
+
+.burger div {
+  width: 25px;
+  height: 3px;
+  background-color: var(--primary-color);
+  margin: 5px;
+  transition: var(--transition);
+}
+
+/* Основное содержимое */
+main {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 2rem;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: var(--dark-color);
+}
+
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.product-item {
+  background-color: white;
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--box-shadow);
+  transition: var(--transition);
+}
+
+.product-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.product-item img {
+   width: 100%;
+  height: 150px; 
+   object-fit: cover;
+}
+
+.product-item h3 {
+  padding: 0.5rem 1rem;
+  font-size: 1.1rem;
+}
+
+.product-item .price {
+  padding: 0 1rem;
+  font-weight: bold;
+  color: var(--accent-color);
+  font-size: 1.2rem;
+}
+
+.product-item .price span {
+  font-size: 1rem;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem 0;
+}
+
+.quantity-controls button {
+  background-color: var(--light-color);
+  border: none;
+  width: 30px;
+  height: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.quantity-controls button:hover {
+  background-color: #e9ecef;
+}
+
+.quantity-controls .quantity {
+  margin: 0 1rem;
+  min-width: 20px;
+  text-align: center;
+}
+
+.add-to-cart {
+  display: block;
+  width: 80%;
+  margin: 0 auto 1rem;
+  padding: 0.5rem;
+  background-color: var(--accent-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.add-to-cart:hover {
+  background-color: #ff5252;
+}
+
+footer {
+  background-color: var(--dark-color);
+  color: white;
+  padding: 2rem 0;
+  margin-top: 3rem;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-around;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.footer-section {
+  flex: 1;
+  padding: 0 1rem;
+}
+
+.footer-section h3 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+.footer-section p, 
+.footer-section ul {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section ul li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-section i {
+  margin-right: 0.5rem;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 1rem;
+  margin-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
+
+</style>
+
+<body>
+    <header>
+        <nav>
+            <div class="logo">прадуктовый магазин</div>
+            <ul class="nav-links">
+                <li><a class="active" href="#home">Главная</a></li>
+                <li><a href="#about">О нас</a></li>
+                <li><a href="#services">Услуги</a></li>
+                <li><a href="#portfolio">Портфолио</a></li>
+                <li><a href="#contact">Контакты</a></li>
+                <li class="cart-icon">
+                    <a href="#cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="cart-count" id="cart-count">0</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+            <button onclick="showRandomMessage()">рулетка</button>
+            <p id="message"></p> 
+        </nav>
+    </header>
+
+    <main id="main">
+        <section class="store" id="store">
+            <h2 class="section-title">Наши товары</h2>
+            <div class="products-grid">
+                <div class="product-item">
+                    <img src="https://th.bing.com/th/id/OIP.vg8R7Fh7ZE7RQ1y6jgRVTAHaHL?rs=1&pid=ImgDetMain" alt="Бейсболка черная">
+                    <h3>нан</h3>
+                    <div class="price">120<span>₸</span></div>
+                    <div class="quantity-controls">
+                        <button class="plus">+</button> <span class="num">0</span><button class="minus">-</button>
+                    </div>
+                    <button class="add-to-cart">В корзину</button>
+                </div>
+                
+                <div class="product-item">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Cigarette-s_x.jpeg" alt="Футболка белая">
+                    <h3>штучный темеки</h3>
+                    <div class="price">50<span>₸</span></div>
+                    <div class="quantity-controls">
+                        <button class="plus">+</button> <span class="num">0</span><button class="minus">-</button>
+                    </div>
+                    <button class="add-to-cart">В корзину</button>
+                </div>
+                
+                <div class="product-item">
+                    <img src="https://www.bing.com/th/id/OIP.P2-illQwJh4tnxmT64kxSAHaHa?w=150&h=150&c=8&rs=1&qlt=90&o=6&pid=3.1&rm=2" alt="Брюки черные">
+                    <h3>максим чай</h3>
+                    <div class="price">450<span>₸</span></div>
+                    <div class="quantity-controls">
+                        <button class="plus">+</button> <span class="num">0</span><button class="minus">-</button>
+                    </div>
+                    <button class="add-to-cart">В корзину</button>
+                </div>
+                
+                <div class="product-item">
+                    <img src="https://main-cdn.sbermegamarket.ru/big1/hlr-system/-19/648/615/795/251/857/100025762338b0.jpg" alt="Кофта серая">
+                    <h3>горила</h3>
+                    <div class="price">520<span>₸</span></div>
+                    <div class="quantity-controls">
+                        <button class="plus">+</button> <span class="num">0</span><button class="minus">-</button>
+                    </div>
+                    <button class="add-to-cart">В корзину</button>
+                </div>
+                
+                <div class="product-item">
+                    <img src="https://www.deloks.ru/upload/iblock/f9c/6tlpyunx0wghfs8wti15hpdnwlu27c05/britva_odnorazovaya_bic_3_action_4_shtuki_v_upakovke_4_full.jpg" alt="Кроссовки белые">
+                    <h3>бритва</h3>
+                    <div class="price">250 <span>₸</span></div>
+                    <div class="quantity-controls">
+                        <button class="plus">+</button> <span class="num">0</span><button class="minus">-</button>
+                    </div>
+                    <button class="add-to-cart">В корзину</button>
+                </div>
+                
+                <div class="product-item">
+                    <img src="https://th.bing.com/th/id/ODL.fa55e3c60d4f39db284ca63881470966?w=134&h=101&c=10&rs=1&o=6&pid=AlgoBlockDebug" alt="Свитер серый">
+                    <h3>колбаса</h3>
+                    <div class="price">2300<span>₸</span></div>
+                    <div class="quantity-controls">
+                        <button class="plus">+</button> <span class="num">0</span><button class="minus">-</button>
+                    </div>
+                    <button class="add-to-cart">В корзину</button>
+                </div>
+
+                <div class="product-item">
+                  <img src="https://th.bing.com/th/id/OIP.Zn5jEXdUOiY57yjaJUvicAHaHa?rs=1&pid=ImgDetMain" alt="Брюки черные">
+                  <h3>сушняк</h3>
+                  <div class="price">240<span>₸</span></div>
+                  <div class="quantity-controls">
+                      <button class="plus">+</button> <span class="num">0</span><button class="minus">-</button>
+                  </div>
+                  <button class="add-to-cart">В корзину</button>
+              </div>
+
+              <div class="product-item">
+                <img src="https://th.bing.com/th/id/OIP.DFnEdAjnQbh1bkktYH-smwHaHa?w=205&h=205&c=7&r=0&o=5&pid=1.7" alt="Брюки черные">
+                <h3>джин семечки</h3>
+                <div class="price">450<span>₸</span></div>
+                <div class="quantity-controls">
+                    <button class="plus">+</button> <span class="num">0</span><button class="minus">-</button>
+                </div>
+                <button class="add-to-cart">В корзину</button>
+            </div>
+
+            <div class="product-item">
+              <img src="https://th.bing.com/th/id/OIP.D1XLJNtx7Ux2WGAfbi1-sAHaHa?w=204&h=204&c=7&r=0&o=5&pid=1.7" alt="Брюки черные">
+              <h3>джин сленый</h3>
+              <div class="price">500<span>₸</span></div>
+              <div class="quantity-controls">
+                  <button class="plus">+</button> <span class="num">0</span><button class="minus">-</button>
+              </div>
+              <button class="add-to-cart">В корзину</button>
+          </div>
+
+          <div class="product-item">
+            <img src="https://th.bing.com/th/id/OIP.1L5CJVTgF0istM7JZ3MhfAHaHa?w=216&h=216&c=7&r=0&o=5&pid=1.7" alt="Брюки черные">
+            <h3>чипсы лэйс</h3>
+            <div class="price">500<span>₸</span></div>
+            <div class="quantity-controls">
+                <button class="plus">+</button> <span class="num">0</span><button class="minus">-</button>
+            </div>
+            <button class="add-to-cart">В корзину</button>
+        </div>
+
+        <div class="product-item">
+          <img src="https://th.bing.com/th/id/OIP.ctehsQpVJc4FTD_MIN63RAHaHa?rs=1&pid=ImgDetMain" alt="Брюки черные">
+          <h3>фиюсти</h3>
+          <div class="price"> 420<span>₸</span></div>
+          <div class="quantity-controls">
+              <button class="plus">+</button> <span class="num">0</span><button class="minus">-</button>
+          </div>
+          <button class="add-to-cart">В корзину</button>
+      </div>
+
+      <div class="product-item">
+        <img src="https://th.bing.com/th/id/OIP.EKymQqwAvyB3muFYJS-BdgHaHa?w=201&h=201&c=7&r=0&o=5&pid=1.7" alt="Брюки черные">
+        <h3>кола</h3>
+        <div class="price">500<span>₸</span></div>
+        <div class="quantity-controls">
+            <button class="plus">+</button> <span class="num">0</span><button class="minus">-</button>
+        </div>
+        <button class="add-to-cart">В корзину</button>
+    </div>
+
+    <div class="product-item">
+      <img src="https://th.bing.com/th/id/OIP.az73uQjCNOksdzG1vVLdSwHaHa?w=153&h=180&c=7&r=0&o=5&pid=1.7" alt="Брюки черные">
+      <h3>пепси</h3>
+      <div class="price">500 <span>₸</span></div>
+      <div class="quantity-controls">
+          <button class="plus">+</button> <span class="num">0</span><button class="minus">-</button>
+      </div>
+      <button class="add-to-cart">В корзину</button>
+  </div>
+
+  <div class="product-item">
+    <img src="" alt="Брюки черные">
+    <h3>фанта</h3>
+    <div class="price">500<span>₸</span></div>
+    <div class="quantity-controls">
+        <button class="plus">+</button> <span class="num">0</span><button class="minus">-</button>
+    </div>
+    <button class="add-to-cart">В корзину</button>
+</div>
+
+<div class="product-item">
+  <img src="https://th.bing.com/th/id/OIP.AY2u_HTyRwYMg7rCTWcHnAAAAA?w=115&h=180&c=7&r=0&o=5&pid=1.7" alt="Брюки черные">
+  <h3>асу</h3>
+  <div class="price">120<span>₸</span></div>
+  <div class="quantity-controls">
+      <button class="plus">+</button> <span class="num">0</span><button class="minus">-</button>
+  </div>
+  <button class="add-to-cart">В корзину</button>
+</div>
+
+<div class="product-item">
+  <img src=""alt="Брюки черные">
+  <h3>нос</h3>
+  <div class="price">300<span>₸</span></div>
+  <div class="quantity-controls">
+      <button class="plus">+</button> <span class="num">0</span><button class="minus">-</button>
+  </div>
+  <button class="add-to-cart">В корзину</button>
+</div>
+
+<div class="product-item">
+  <img src="https://th.bing.com/th/id/OIP.NbHwoFLhmcBvtH5q2CiXbgHaG9?w=213&h=201&c=7&r=0&o=5&pid=1.7" alt="Брюки черные">
+  <h3>ручка</h3>
+  <div class="price">200 <span>₸</span></div>
+  <div class="quantity-controls">
+      <button class="plus">+</button> <span class="num">0</span><button class="minus">-</button>
+  </div>
+  <button class="add-to-cart">В корзину</button>
+</div>
+
+<div class="product-item">
+  <img src="" alt="Брюки черные">
+  <h3>лавровый лист</h3>
+  <div class="price">60<span>₸</span></div>
+  <div class="quantity-controls">
+      <button class="plus">+</button> <span class="num">0</span><button class="minus">-</button>
+  </div>
+  <button class="add-to-cart">В корзину</button>
+</div>
+
+<div class="product-item">
+  <img src="" alt="Брюки черные">
+  <h3>туз</h3>
+  <div class="price">120 <span>₸</span></div>
+  <div class="quantity-controls">
+      <button class="plus">+</button> <span class="num">0</span><button class="minus">-</button>
+  </div>
+  <button class="add-to-cart">В корзину</button>
+</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section about">
+                <h3>О нас</h3>
+                <p>Baha Store - это магазин модной одежды и аксессуаров по доступным ценам.</p>
+            </div>
+            <div class="footer-section links">
+                <h3>Быстрые ссылки</h3>
+                <ul>
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#about">О нас</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </div>
+            <div class="footer-section contact">
+                <h3>Контакты</h3>
+                <p><i class="fas fa-phone"></i> +7 (777) 379 69 26 </p>
+                <p><i class="fas fa-envelope"></i> прадуктовый.kz</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; бла зайбал
+        </div>
+    </footer>
+
+    <script src="sta.js"></script>
+</body>
+
+</html>
